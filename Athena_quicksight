@@ -1,0 +1,44 @@
+ATHENA
+- serverless queries of s3 data
+- different forms
+- under the hood "presto" open source
+- structured, semi, unstructured dara
+- integration with noteboooks, quicksight
+- can take advantage of glue esp schema obtained in glue
+- cost-model:
+    pay as you go
+    $5 per tb
+    failed dont count
+    no charge for DDL
+- save lots by saving in columnar format orc/ parquet (save 30-90%, improve performance)
+- glue and s3 own charges
+- security
+    - tls encryption in transit
+    - iam, acl, s3 bucket policies amazonathenafullaccess
+
+QUICKSIGHT
+- cloud powered business analytics
+- visualizations (can be done by all employees very simple)
+- serverless
+- "stories" -> keypoints tour
+- data to SPICE (support paralell in-memory calculation engine)
+- 10gb of spice
+
+It has ML INSIGHTS FEATURE
+    1. Anamoly detection using RandomCutForest
+    2. Forecasting using RandomCutForest
+    3. Autonarratives (converting stories to words)
+
+Security:
+    MFA, VPC, row-level security, private VPC access
+    iam
+    event signup (standard, enterprise edition(encryption at rest, micrsofot AD))
+
+VisualTypes
+- autograph (automatically selects which is best one)
+- barcharts (compare, distributions)
+- line (changes in time)
+- stories
+- scatter/ heatmaps (correlation)
+- pie/tree (aggregation)
+- pivot tables (tabular data)

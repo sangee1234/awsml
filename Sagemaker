@@ -1,0 +1,40 @@
+SAGEMAKER
+- to handle entire ML workflow
+- fetch, clean, prepare data -> train, evaluate mdel, deploy model in prod
+                                    
+                                    client application                                     ECR
+                                            |
+                                        endpoints
+                                            |
+                ------------------> model deployment hosting <-------------------------- inference code (for results)
+                |
+s3 model artifacts(daved weights) <-----------------
+                                                    |
+s3 training data bucket  ---> model training(sagemaker provisions hosts using image) <--- training code image
+
+Sagemaker notebooks, sagemaker ui
+- notebook instances on ec2
+- s3 access
+- libraries like scikit
+- built-in models
+- spin up training instances/ deploy training models
+
+
+1. Data preparation on sagemaker
+- data must come from s3
+- ideal format is recordIO/ Protobuf
+- can integrate with spark for preprocessing
+
+2. Create training job
+- url for s3 bucket training data
+- ml compute resources like ec2
+- url of s3 bucket o/p
+- ecr path to training code
+- training option (built-in algo/ spark MLLib/ custom code/ docker image/ AWS marketplace code)
+
+3. Save to s3 (spin endpointa, batch transforms)
+
+- elastic inference: for accelerating dl models
+- sagemaker neo: for edge devices
+- autoscaling: for endpoints scaling
+- inference pipeline

@@ -1,0 +1,41 @@
+FEATURE ENGINEERING
+- train down features, create new, transform
+- handling missing data
+- reducing dimensions
+
+Curse of Dimensionality
+- too many features can become problematic
+- can lead to sparse data
+- can result in a bigger solution space and finding solution is difficult
+- PCA/ Kmeans (unsupervised)
+
+Missing data
+- mean value replacement
+- median better in case of outliers 
+- not as good as:
+    wont take correlation
+    category: better to use mode
+- dropping few rows, if its very few of them
+Best way: Use ML to impute missing data
+i. KNN: better for numerical data
+ii. DL: good for categorical also, but complex
+iii. Regression: finding linear and non-linear realtions to help fill missing data
+iv. MICE(Multiple imputation by chain equation): best way
+v. get more data
+
+Unbalanced data
+- large discrepancy between fraud and true data
+- oversampling: taking minority and copying over
+- undersampling: remove majority(not so good, good to avoid scaling issues)
+- SMOTE(Synthetic minority oversampling TEchnique): artificially generate new samples using KNN
+- Adjusting thresholds in classification
+
+Outliers
+- variance: how spread out data is
+- std_dev: square root of variance, if >1sd from mean, then outlier
+- remove or use random cut forest algorithm
+
+Binning
+- numerical/categrical by ranges of values
+- sometimes not precise, want categorical data to coverup imprecision
+- quartile binning: categorising data by distribution

@@ -1,0 +1,51 @@
+DEEP LEARNING
+
+- brain structure similar to GPU
+- very good use of parallelization
+- Framework --> Tensorflow(Google, higher level Keras)
+            --> MXNET(Apache), aws tends to support this
+
+Activation functions
+- function onsude a neuron which decides what i/p will give what o/p
+- linear y=x, does nothing
+- need non-linear functions to learn complex patterns, they must have useful derivatives
+- sigmoid/logistic: 0 to 1
+- tanh/hyper: -1 to 1 (better for data mean around 0)
+- computationally expensive and lot of time near -inf and inf, slow LEARNING
+- Relu: easy and fast (x if x>=0 else 0), not good for -ve values
+- LeakReLU/ ParametricReLU(slope learnt through backpropagation)/ ELU
+- softmax: multiple classification, converts i/p to probabilities for each class, cant give multiple classes
+- sigmoid: binary or for many classes for 1 input
+
+CNN
+- feature-location invariant, doesnt depend on location, object can be anywhere in image
+- inspired by visual cortex
+- convolution: to chunk and process
+- different filters applied for different features
+- conv2D: convolution, maxpool2D: reduce to max, Flatten: 2D to 1D
+- general
+    conv2D --> maxppoll --> dropout --> flatten --> dense --> droupout --> softmax
+- computationally intensive, lots of hyperparameters, getting training data is hard
+
+CNN special architectures and topologies
+- LeNets: good for handwritings
+- ALexNet: good for image classification
+- GoogleNet: deeper, better performance, incpetion (group of convolution layers)
+- resNet: deeper (uses skip connections)
+
+RNN
+- for sequences, time-series data
+- memory cell: more recent timestamps have more influence
+- topologies    
+    - seq2seq: stock price on history
+    - seq2vec: words to sentiment
+    - vec2seq: caption from image
+    - encode-decode: seq2vec2seq (machine translation)
+- is hard, need to backpropagate in time and layers
+- computationally high due to many layers
+- LSTM: short-term and long-term dependencies
+- GRU: simplified LSTM
+
+EMR
+- supports apache MXNET and GPU instance types(P2, P3, G3)
+- many APIs with libraries installed

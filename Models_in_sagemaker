@@ -1,0 +1,216 @@
+LINEAR LEARNER
+- for fitting linear regression
+- regression and classification (linear threshold function, binary/ multiclass)
+- I/O: 
+    - reordIO-wrapped protobuf (float32)
+    - csv (first column in label)
+    - file (data as one)/ pipe (stream from s3, efficient for large data)
+- how
+    - train data must be normalised, shuffled
+    - stocastic gradient descent
+    - choose optimisation algorithm
+    - train mutliple model in parallel and choses best
+    - l1,l2 regression
+- hyperparameters
+    - balance_multiclass_weights (give each class equal importance)
+    - learning_rate, mini_batch_size, l1(reg), l2(wd weight decay)
+
+XGBOOST
+- extreme gradient boosting
+- boosting group of decision trees, new trees built to corrct error of previous trees
+- use gradient descent to minimise loss
+- classification also regression also(regression trees)
+- I/O:
+    - not made for sagemaker, opensource
+    - supports libsvm, csv, now even for recordIO-protobuf/paraquet
+- how
+    - model seriallized/ deserialized with pickle
+    - use sagemaker.xgboost with notebook
+    - or built-in algorithm useing docker image in ecr
+- hyperparameters
+    - subsamplle: prevent overfitting
+    - eta: step-size like learning_rate
+    - gamma: min loss required to create partition in tree
+    - alpha: l1 regression term
+    - lambda: l2 regression term
+- CPU only algorithm: distributed (memory-loud and not comput-loud), M5 is good
+- GPU -> 1instance and tree_method=gpu_hist, more quickly so can be cheaper
+
+
+Seq2Seq
+- seq of tokens to seq of tokens (tokens in integer, most others need float)
+- rnn/ cnn
+- machine translation, text summarization, speech2text
+- I/O:
+    - recordIO-protobuf(tokens in integer, most others need float)
+    - tokenised text files
+    - training data, validation data, vocab file
+- how
+    - can take days to train
+    - pre-trained model available
+    - public datasets available for translation tasks
+- hyperparameters
+    - batch_size, op, alpha, layers, opt_on(accuracy, bleuscore, perplexity)
+    - blue_score and perplexity are imp for evaluating machine translation
+- GPU (p3, one machine or many GPUs in 1 machine)
+
+DeepAR
+- forecasting series data
+- uses rnn
+- can train many time series
+- I/O:
+    - json (start_timetstamp, target_series) important only for DeepAR
+    - can add dynamic and categorical features
+- hyperparameters
+    - dl parameters and context_length(how many points before making prediction)
+- CPU/GPU 1/multi-machine
+- CPU only for inference
+
+BlazingText
+- TextClassification (only for sentences)
+    -labels, webseraches, information retrieval
+    - I/O:
+        - __label__ male sentence
+        - augmented manifest text format {source:, label:}
+    - C5 instance < 2Gb, else bigger one
+- Word2Vec
+    - skipgram(order matters), cbow(order doesnt matters), batch_skipgram
+    - I/O:
+        - text file with 1 sentence per line
+    - P3 node
+- epoch, alpha, mode, window_size
+
+Object2Vec
+- similar to word2vec, operates at object level
+- objects -> embedding
+- for clustering, recommendations
+- unsupervised
+- I/O:
+    - tokenised data, sequence of tokens, pair of attributes
+- how
+    - 2 input channels, passed to encoders , then comparator and then label
+    - enocders can be cnn,bilstm or avpoolencoder
+- 1machine M5/P2
+- inference P2 large
+- INFERENCE_PREFERD_mode to tell embedding, classification or regression
+
+ObjectDetection
+- from scratch/ pretrained
+- bb and score
+- input is recordIO or image+json_annoation
+- cnn + ssd (single shot detector), vgg16 and resnet
+- transferlearning: use pretrained for initial weights
+- uses flip, rescale, jitter for preventing overfitting
+- gpu, multigpu, multimachine
+- cpu for inference
+
+ImageClassification
+- tells what objects present
+- I/O:
+    - recordIO for ApacheMXNEt, not wrapped in protobuf so its different
+    - image + .lst text file
+    - augmented image format for pipe mode
+    - resnet CNN, defined image size 224x224x3
+    - transfer learning
+
+SemanticSegmentation
+- pixel-level object segmentation
+- creates segment mask
+- I/o:
+    - image + annotation
+    - augmented image format -> PIPE
+- MXNET GLUOn/ GLUONCV
+- FCNN/ PSP( pyramidscaleparsing)/ Deeplensv3
+- resnet50/ resnet101
+- only gpu(p3/p2 in single machine)
+
+
+Random cut forest
+- anomaly detection
+- unsupervised
+- assign anamoly score to each point
+- I/O:
+    - create a forest of trees
+    - each tree is a partition of training data
+    - change in complexity by adding point to tree
+- #trees, #sizeofeachtree
+- CPU M4,C4,C5 no GPU
+
+Topic Modelling
+- unsupervised
+- docs to topics
+- neural topic mode
+- algorithm "neural variant inference"
+- 4 channels(train, test, valid, auxfile_vocab)
+- I/O:
+    - csv/ recordIO-protobuf
+    - tokenised docs
+    - count of each word in vocab
+- define number of topics needed
+- training GPU, inference CPU
+
+LDA
+- latent dirichilet allocation
+- unsupervised
+- clustering
+- I/o:
+    - csv/ recordIO-protobuf
+    - count of each word in vocab
+- unlike neural model, its cheaper not neural based
+- each word gets a log likelihood
+- hyperparameters:
+    #topics, alpha0(conocentration parameter, more dense, less sparse)
+- CPU single instance
+
+KNN
+- classification (most freq labels), regression
+- I/O:
+    - recordIO-protobuf/ csv(1st  column label)
+    - file/ pipe
+- sampled -> dimensionality reduction -> build index -> serialize -> query
+- parametres: K, sample_size
+- CPU/GPU
+
+KMeans clustering
+- unsupervised
+- similar together
+- KNN is similar but supervised
+- I/O:
+    - recordIO-protobuf/ csv
+- train using shardbyS3key
+- file/ pipe mode
+- can use K center to get k (extra centers allowed in sagemaker)
+- kmeans++ for choosing initial centers as far as possible
+- K->k using Lloyds algorith,
+- CPU/GPU
+
+PCA
+- principal component analysis
+- dimensionality reduction
+- final dimesions are components
+- 1st component is one with largest variance
+- unsupervised
+- I/O:
+    - recordIO-protobuf/ csv
+- uses covariance matrix by SVD algorithm to fill sparse data and randomise large data
+- GPU/CPU
+
+Factorization method (sparse data)
+- recommendation system
+- for problems where we dont get data easily
+- fill sparcity
+- supervised: classification/ regression
+- I/O:
+    - recordIO-protobuf
+    - no csv as its sparse data
+- make a giant  sparse matrix
+- build factors of matrix, what factors are important
+- CPU/ GPU(for dense data)
+
+IP insights
+- finding faulty behavior (unsupervised)
+- suspicious activities from IP addresses
+- I/O:
+    - cav only (entity, ip)
+    - uses NN to get IP
+- CPU/ GPU

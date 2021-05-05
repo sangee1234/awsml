@@ -1,0 +1,66 @@
+sagemaker+spark
+- spark does lot of sagemaker, but more preprocessing available
+- aws has sagemaker-spark library
+- preprocess data using spark, gives a dataframe
+- use sagemaker estimator instead of spark MLLib
+- sagemaker notebook + EMR cluster running spark
+- sagemakerEstimaror() -> .fit -> .transform()
+
+IDE -> sagemakeer studio
+- intergrates many features
+- intergrate with jupyter notebook, allow to share notebook
+
+sagemakeer experiments
+- have all ML jobs history in 1 place
+
+sagemakeer debugger
+- save models at intervals
+- save gradients
+- define rules for conditional checking
+- get trainig reports
+- smlibrary can be used to create hooks during trainig process
+- insights dashboard for debugger
+- debugger profile rule for profile
+- built in actions for notifications or to stop training
+
+autopilot
+
+- wrapper autoML
+- automatic algoselection. modeltuning, does all trial and error
+- load data from s3
+- select target
+- automatic model creation for best prediction
+- give a model notebook for visibility and control
+- model leaderboard ranks model
+- can deploy and monitor best notebook
+- can add human guidance
+- used for classification and regression, 3 algos LinearLearner, XGBoost, DL
+- data must be in tabular csv
+
+sagemaker clarify
+- understand bias i.e, unbalanced data
+- how different features contribute to training
+
+sagemakeer monitor
+- get alerts on quality deviation
+- cloudwatch to get reports
+- visuakize data drifts
+- detect anomalies and new features
+- no code needed
+
+- data in s3
+- set monitoring schedule
+- cloudwatch
+- NDCG normalized discounted cummulative gain compares features and gives ranking
+
+Layers
+
+STUIO
+Autopilot/ Modelmonitor
+experiments, debugger, automodeltuning
+
+2021
+Jumpstart: 1 click models and algos from library of moodels
+Datawrangler: data preprocessing like glue
+FeatureStore: find, discover and share features online/offline
+EdgeManager: edge devices with sagemaker neo

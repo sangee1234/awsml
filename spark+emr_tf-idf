@@ -1,0 +1,28 @@
+SPARK+EMR for TF-IDF
+
+- TF-IDF: Term frequency Inverse document frequency
+- used in search algorithms
+- how relevant a term is to a document
+- tf: how often a term comes in a document
+- df: how often a term comes in entire set of document
+= tf/ df
+= tf*IDF
+- gives how important and unique a term is to a document
+- use log of idf, since word frequencies is exponential
+- treated as BOW, noo realtion between words
+- Unigrams, bigrams and trigrams all are considered
+- for a given search word, sort documents using tf-idf score
+
+
+SPRAK+EMR+ZEPLINE
+- create a cluster, choose application as spark, create ec2 key pair, add emr role and ec2 insrance profile
+- have zepline, connect to ec2 instance, enable web connection
+- in security group for manager, open ssh port 22 to our ip
+- install putty via ssh, in auth put keyfile, putty can be used to oconvert key file
+- tunnel is set up to oconnect from web
+- proxy management tool is used to tunnel
+- create a zepline notebook
+    - spark.read from s3
+    - add column names
+    - tf-idf deals with tokens, tokenise data
+    - idf package in spark can be used

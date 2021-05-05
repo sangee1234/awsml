@@ -1,0 +1,31 @@
+REAL-TIME
+
+                    lambda  ___ firehose
+                      |    | 
+produce --> KDS  --> KDA --> KDS --> EC2 --> Sagemaker
+    |                 |
+  firehose --------------> s3
+
+
+
+VIDEO-LAYER
+
+source --> kvs (1 per device) --> rekognition --> kds
+                |
+                EC2 --> Sagemaker
+                |
+                KDS --> lambda --> notification
+
+
+BACTH-LAYER
+
+premise --> DMS  --> RDS --> pipeline --> s3 --> glueETL --> s3 --> AWS BACTH
+    |________|________|_________|__________|________|_________|_______|
+                    glue data catalog
+
+ANALYTICS-LAYER
+
+s3 ----> emr (hadoop/spark/mapreduce)
+    ----> redshift
+    ----> athena    ---> quicksight
+    ----> glue data catalog --> athena

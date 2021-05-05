@@ -1,0 +1,69 @@
+TUNING NEURAL NETWORK
+- by gardient descent, minimizing cost each epoch
+- how far samples are is learning rate, less slow, more might overshoot over correct value
+- bacth size(how much sample trained in 1 epoch) large will get stuck at local value, small is good
+
+Regularisation technique
+- prevent overfitting, good on trainig data but not on new data
+- too many layers or neurons can result in overfitting
+i. reduce layers or neurons
+ii. use dropout (randomnly cancel neurons)
+iii. early stopping (when acc increases but validation fluctuates)
+
+Grief with gradients
+- vanishing gradients
+    - as slope approaches 0, learning is too slow
+    - in deeper networks, this small weights propagtes, esp in RMM
+    Solution:
+        - use better activation function like ReLU
+        - split NN into separate layers and train
+        - LSTM/ Residual network
+- exploding gradients
+
+Graident checking
+- debugging checking, check the derivatives during computing
+- to see if NN code is right
+
+L1 L2 Regularisation
+- prevent overfitting in ML and in general
+- a Regularisation term is added during learning weights, l1->lambda*sum(w) l2->lambda*sum(w^2)
+- l1: performs feature selection, can become 0, ineffienct, sparse o/p
+- l2: all features included, just weights are adjusted, efficient, dense o/p
+- l2 is best, but l1 is used in case of feature selection, dimensionality reduction
+
+Confusion matrix
+- sometimes accuracy doesnt tell everything
+- TN/ FP/ FN/ FN matrix is confusion  matrix
+
+Measuring modesl
+- recall: its true positivity rate i.e. TP/TP+FN
+        - also called sensitivity
+        - good if care about false negatives
+        - true positivity rate
+- precision: % of relavant results i.e. TP/TP+FP
+        - good if care about false positives
+- specitivity: TN/ TN+FP
+- f1 score: 2PR/P+R, harmonic mean of precision and recall
+- rmse: care about accuracy
+
+ROC curve(receiver operating characteristic curve)
+- tpr vs fpr
+- more towards left top is good
+- AUC (area under ROC), 0.5 diagonal ,1 is perfect
+- good for comparing classifiers
+
+ENSEMBLE METHODS
+- Bagging
+        -Rg, random forest
+        - take multiple versions of same model and average result
+        - can be run in parallel
+        - prevents overfitting 
+- Boosting
+        - run in serial
+        - boosts all weaker submodels
+        - assign weights to each datapoint, and modify them according to differnt rules and combine them
+        - refine weights
+        - XGBoost (current hot algorithm to improve accuracy)
+        - each rule can be weak, combined is strong
+
+

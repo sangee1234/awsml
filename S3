@@ -1,0 +1,35 @@
+S3
+
+- store objects in buckets
+- buckets have globally unique name
+- have key i.e. full path
+- max object size is 5TB
+- has integrationw with sagemaker
+- decoupled from ec2 to allow scaling
+- athena used for serverless querying in S3
+- partitioning done by date or by product
+- storage tiers
+    - standard (general purpose)
+    - IA (backup)
+    - one-zone IA (regenrated)
+    - s3 intellligent tiering
+    - amazon glacier (archive)
+- lifecycle rules
+    - transition rules
+    - expiration rules
+- s3 security
+    - sse-s3: key by aws
+    - sse-kms: key by aws-kms
+    - sse-c: custom key
+    - client side
+    - user based
+        - iam policies: which apis can be accessed by account
+    - resource based
+        - bucket policy: cross account access/ bucket wide policies
+            json(resources/ action/ effect/ pricipal)
+            grant public access/ cross account/ force encryption
+        - oacl/ bacl(less common)
+    - default encyprion
+    - bucket policies evaluated before defauly encryption
+- networking (vpc endpoint gateway for private traffic within vpc)
+- cloudtrail for api calls

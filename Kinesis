@@ -1,0 +1,58 @@
+Kinesis
+
+- managed alternative to kafka
+- "real-time"
+- data is replicated syncronously to 3 AZs
+- kinesis:streams low latency streaming
+- kinesis:analytics real-time analytics on streaming using sql
+- kinesis:firehose load streaming to s3, redshift, es, splunk
+- kinesis:videostreams
+
+- streams -> shards/ partitions
+- producers -> sh1/sh2... -> consumers
+- 24hrs by deafult, upto 7 days
+- multiple applications can read on own pace
+- once data in, cannot be deleted (immutability)
+- records upto 1MB (good for streaming data)
+- producers can send upto 1 MB/s per shard else provisioned throughput exception
+- consumers can take upto 2 MB/s per shard
+
+- firehose
+- fully managed no admin
+- near real-time not realtime
+- autoscaling
+- different formats/ conversions possible
+- supports compression to s3
+- pay only for amount of data through firehose
+- lambda transformation can be applied on firehose
+
+Stream                                          |   Firehose
+- for real-time applications                    |   - for data delivery "massive" to train algorithms
+- real-time                                     |   - near real time
+- custom code for producer/ consumers           |   - fully managed
+- manage scaling (sharding/ merging)            |   - autoscaling
+- data storage (1-7 days)                       |   - no data storage
+
+Data Analytics
+- stream ETL, metric generation, response analysis
+- autoscaling
+- does schema discovery
+- integrates with lambda function
+- Random-cut forest
+    - anamoly detection on numeric columns
+    - uses recent history so keeps changing
+- Hotspots
+    - returns information about dense regions
+    - less changing
+
+Video Streams
+- 1hr to 10yrs retention
+
+    checkpts in dynamodb
+            ^
+            |
+vs ---> App in docker/ EC2 ---> Sagemaker
+            |
+            |(send decode info from sagemaker)
+            v
+    kinesis data stream

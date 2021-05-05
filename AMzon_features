@@ -1,0 +1,113 @@
+Amazon Comprehend
+- NLP
+- input any data -> extract phrase, entities, sentiments, language, topics, classification
+- can train own model/ pretrained
+
+Amazon Translate
+- uses DL
+- 1language to another
+- custome terminologies(Csv/ tmx format)
+- API may also be available
+
+Amazon Transcribe
+- speech to text (specify language)
+- streaming audio support
+- speaker identification (s1, s2...)
+- custom voabulary (list/ table)
+- very user friendly
+
+Amazon Polly (parrot)
+- text to speech
+- lexicons: custom pronounciation
+- ssml(speech synthesis markup language, give info for prounciation, parsing, pitching)
+- sppech mark: can get where sentence starts/ stops, useful for lip syncing
+
+Rekognition
+- object and scene detection
+- image moderation (tell if offensive content)
+- facial analysis
+- celebrity recognition
+-  text in image
+- video analysis
+- image from s3/ image bytes
+- how good deoends on lighting/ resolution
+- video from kinesis videostreams
+- resolution > framerate
+- lambda upon image upload
+
+Amazon forecast
+- give forecasting using ml
+- autoML (chooses best model for given timeseries)
+- ARIMA
+- can put many timeseries to compare (DeepAR under hood)
+- "dataset groups", "predictor" (tagert), "forecasts"
+
+Amazon Lex
+- inner working of Alexa
+- chatbot engine
+- uses "intents" Eg., Pizza pricing
+- slots for extra info like "size, topping"
+- can deploy chatbots
+
+Amazon personalize
+- for recommendation system
+
+Amazon textract
+- ocr with forms, tables
+
+AWS deepLens
+- DL enabled camera
+
+AWS DEepcomposer
+- for educational purposes
+- AI powered keyboard
+- melody -> song
+
+Amazon Fraud detection
+- historical data
+- build model
+- give API for any application
+
+Amazon code Guru
+- code reviews
+- "Java" only for now
+
+
+
+Contact Lens for amazon contact
+- take call
+- Transcribe
+
+Amazon Kendra
+- enterprise search
+- "where is IT support" i.e. search engine
+- combine many data to one data report
+
+Amazon AUgment AI
+- build workflows for low confidence performace
+- checked by human
+
+Alexa
+Transcribe -> Lex -> Polly
+
+Translator
+Transcribe -> trnaslate -> polly
+
+Jeff Bezos detector
+DeepLens -> Rekognition
+
+People Happy
+transcribe -> comprehend
+
+LAB
+1. Tune CNN on EC2
+i. EC2
+    - AMI using tensorflow
+    - deep learning AMI
+    - set key pair
+    - security group -> edit SSH to own IP address
+    - connect button -> gives how to connect as jupyter notebook
+    - DNS -> putty -> SSH -> Auth -> Tunnel
+    - Terminal -> jupyter notebook -> URL
+    - batch_size: small(regularisation), large(stuck in minima)
+

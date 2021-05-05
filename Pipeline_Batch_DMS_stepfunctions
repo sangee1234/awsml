@@ -1,0 +1,46 @@
+PIPELINE
+- To move data from one source to another
+- destinations include s3, rds, dynamoDB, redshift, emr
+- manage task dependencies i.e. orchestartion
+- retry and notify on failures
+- data sources can be on-premise
+- highly available
+
+RDS --> ec2(pipeline created) --> s3
+
+AWS BATCH
+- allow batch jobs to run from docker images
+- dynamic provision of instances
+- optimal quality and type based on volume/ requirement
+- no need to manage clusters, full serverless
+- just pay for underlying instances
+- schedule batch jobs using cw events
+- orchestrate using step functions
+
+GLUE                            |   BACTH                                   |   PIPELINE    
+- ETL run spark,scala,python    |   - for any batch jobs not only ETL       |   - orchestration service
+- config automatically by AWS   |   - automatically provisioned by AWS      |   - have more control on instances like ec2/emr
+- data catalog to make data 
+    available to athena/redshift|                                           |   - integrates with any destinations
+
+DMS
+- continuous replication (not batch)
+- no data transformation
+- can use it followed by GLUE
+- Data migration service
+- quickly and securely migrate db to AWS, self-reliant and healing
+- source db remains available during migration
+- supports homogenous and heterogenous migration
+- continuous data movement using CDC
+- need to create EC2 interface that runs DMS
+
+AWS Step functions
+- used to design workflows
+- easy visualisations
+- error handling and retry mechanisms
+- audit history of workflows
+- ability to wait for amount of time
+- max execution time is 1yr, so can execute for a long time
+Eg,
+start -> get dataset(lambda) -> train(sagemaker) -> s3
+btachjobs -> Success/ Failure

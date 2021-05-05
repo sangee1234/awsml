@@ -1,0 +1,90 @@
+ELASTIC MAP REDUCE
+- Managed hadoop framework on EC2 instances
+- includes sprak, Hbase, Presto, Hive
+- EMR notebooks
+- secure integration with AWS
+- if need to send a lot of data to ML model, emr provides a way to distribute it securely to computers in a parallel way
+- cluster: collection of nodes(Ec2 instances)
+- nodeType:
+    i. task
+        good only for task, not to store data
+        spot instances can be used
+    ii. core
+        run tasks, store data on hdfs
+        more risk
+    iii. master
+        coordinates distribution
+        scheduling of tasks
+    ib. transiet
+        auto termination
+        after step stop
+    iib. long running
+        interact with application when need and terminate manually
+        experiment when dont know what you want
+- can connect to cluster through master node from terminal or submit steps from console
+- supports ec2, vpc, s3(instead of hdfs), cloudwatch, iam, cloudtrail(api), pipeline
+
+STORAGE
+1. hdfs
+    - distributed and custers
+    - multiple copies for failure
+    - as blocks (128MB)
+    - emphemeral storage (once cluster deleted, gone)
+    - faster (local)
+2. emrfs
+    - s3 as hdfs
+    - consitent view (to track dynamoDB)
+3. localfilesystem
+    - not distributed
+4. ebs to hdfs
+cost: charges per hr + ec2 charges
+
+HADOOP
+- Mapreduce + yarn + hdfs
+ (Hadoop core for all os scripts)
+- Hdfs caching intermediate results during mapreduce
+- yarn yet another resource negtiator, to manage resource
+- mapreduce framework for writing processes to process in parallel
+    mapper (process/ transform) + reduce (aggregate)
+- now toplayer is mapreduce + spark (for preprocessing big data workloads)
+
+Apache spark for EMR
+- Use DAG for speed, APIS for java, scala, pythom
+- supports batch, interactive and real-time processing
+- not generally for batch, more for real-time processing
+driver program (upon write to run spark SPARK CONTEXT)
+                    |
+    cluster manager (spark, yarn)
+                    |
+        executer (tasks, cache)
+
+COMPONENTS
+- spark core (memory, scheduling, storage, apis)
+- spark sql (distributed, low latency, x100 faster, optimiser)
+- spark streaming (streaming analytics, mini-batches, kafka)
+- mlib (mlib for spark, diff algos that are distributed and parallel)
+- graphx (distributed graph processing framework)
+
+Zeplin: notebook to run spark code interactively
+EMR notebook: similar to zeplin, more integration with AWS
+    backup for s3 can provision cluster from notebook, vpc only via console
+
+Instance type:
+- master node:
+        if <50 nodes, m4.large
+        else m4.xlarge
+- core and task:
+        m4.large good, if more dependenices t2.medium
+        m4.xlarge, increase performance
+- cluster computer instance:
+        for ml/ nlp
+- spot instances: for task nodes
+
+EMR security
+- IAM policies tagging for per cluster
+- Kerberos: strong encryption with secret key encryption
+- SSH: tunneling to view interfaces
+- EMR service role/ instance profile
+
+
+

@@ -1,0 +1,32 @@
+1. REDSHIFT
+    - data warehousing
+    - OLAP (column based)
+    - SQL anayltics
+    - load from s3 to REDSHIFT
+    - use redshift spectrum to query directly on s3
+
+2. RDS/ Aurora
+    - OLTP
+    - row based
+    - provision servers
+
+3. DynamoDB
+    - NoSQL
+    - serverless
+    - R/W capacity
+    - store MODELS
+
+4. s3
+    - object storage
+    - serverless
+    - infinte storage
+    - integration with major services
+
+5. elasticSearch
+    - indexing
+    - searching
+    - anayltics
+
+6. elasticCache
+    - caching mechanism
+    - not for ML

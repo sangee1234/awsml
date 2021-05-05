@@ -1,0 +1,54 @@
+DATA ANALYSIS
+
+Seaborn
+- Boxplot: its prettier box and whisker plot with many attributes
+- Heatmap: colors represent magnitude
+- Pairplot: visualize every combintaion (find correlation)
+- Joinplot: scatterplot + histogram
+
+RandomForestClassifier:
+- a set of decision trees with lil randomness in each tree
+- clf = RFC(n_est=10 #decision_trees)
+  clf.fit(x, y)
+  clf.predict(x)
+- scikit has preprocessing models
+- can wrap a model in scikitLearnEstimator using KerasClassifier
+- cross_val_score to estimate: ramndom separate to train & test and average result
+
+Types of DATA
+- NUMERICAL
+    quantitative measure
+    discrete data
+    continous( infinte possibility)
+
+- CATEGORICAL
+    it is data that has no meaning
+    can assign number to category but wont have meaning
+
+- ORDINAL
+    mix of number + category    
+    category that has meaning and ooorder, can be compared
+
+DATA DISTRIBUTION
+- Categorising data falling into certain range
+
+NORMAL DISTRIBUTION
+- it is a probability distribution function
+- probability of given range of values
+
+Probabilty mass function
+- for discrete data
+- it is a histogram
+
+Poission distribution
+- based on Poission experiment
+- event can be success/ failure
+- when average rate of occurence is know probabilty of event
+P(event) happening a fixed amt of time = e^-lambda. lambda^x / x!
+
+Binomial distribution
+- bernoulli when #trials is 1
+- 2 events exact probability of success/failure like head/tail
+- and ask number of time
+P(x) = nPx. p^x. (1-p)^x
+

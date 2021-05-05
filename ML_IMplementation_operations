@@ -1,0 +1,87 @@
+ML Implementations Operations
+- models hosted in docker container (own/ prebuilt)
+- if tensorflow can host to multiple machines
+
+Structure of training container
+/opt/ML
+    - i/p
+        - config
+        - data
+    - models
+    - code
+        - script
+    - o/p
+        - failure
+
+Structure of deployment container
+/opt/ML
+    - model
+        - modelfiles
+
+IMAGE
+- nginx.conof: conf for frontend
+- predict.py - code for prediction
+- serve/: flasr container for making predictions
+- train/: for training
+- wsgi.py: flask app for serving
+
+Putting in a dockerfile for own container
+FROM tensorflow/tensorflow:2.0.0
+RUN pip install sagemaker-container
+COPY train.py /opt/ml/code/train.py
+ENV sagemaker_prog train.py
+
+using own image
+cd dockerfile
+docker build -t foo
+for sagemaker.estimator import Estimator
+Estimator(image_name='foo')
+est.fit()
+
+Producation variants
+- can test multi models on real traffic
+- run models in parallel to compare
+- variant weights, how much traffic to send to original and new modesl, increase percentage using rampup
+
+Sagemaker on EDGE
+- edge devices, complicated ibn calculcations, has compile once and run many
+- run local in machine (avoids cloud latency)
+
+Neo + AWS IOT (Greengrass)
+- non-compiled model -> deploy to hTTps endpoint (same instance type)
+- greengrass: deploy to edge device
+- train in cloud, deploy in local
+- lambda function for inference applications
+
+Sagemaker security
+Best practices:
+- use Iam, mfa, ssl/tls connecting to anything, cloudtrail to log api, use encryption
+- aws kms (encrypt data at rest in sagemaker)
+- s3: encrypt s3 bucket
+- in transit 
+- ct for auditing
+
+Sagemaker + VPC
+- training job in VPC
+- private VPC for extra security 
+- notbook internet (enabled by default) need to set VPCEndpoint and policies for sagemaker to work
+- if disabled, need endpoint (PrivateLink, NATGatway)
+
+resource managament
+- which instance? dl (training: p2/p3, inference: c4,c5 )
+- managed spot training: to reduce cost use it, need to maintain checkpoints to continue without interfenermce
+- can wait for spot instances, will increase training time
+
+elastic inference
+- accelerating performance
+- add an eia with a cpu, less cost than gpu
+- m1.eia.large/ xlarge, even to notebooks
+- onx -> on mxnet to make it compatible
+- can set autoscaling policies, can test config before using it, sagemaker + AZs
+- auto distribute across AZ, but need many instances
+- config VPC with 2 subnets each in a different AZ
+
+inference pipeline
+- can use many images tofether using pipelines
+- can combine preprediction, preditcion, postprediction
+- realtime and batch

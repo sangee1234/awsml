@@ -1,0 +1,36 @@
+GLUE
+
+GLUE Data Catalog
+- It is a metadata repository for all your tables
+- has automated schema inference
+- schemas are versioned
+- integrates with athena and redshift
+- GLUE DATA CRAWLERS help to build data Catalog
+- crawlers go through data and infer schema and partitions
+- works on different types and databases
+- can run on schedule/demand
+- need IAM roles to access datastores
+
+GLUE ETL
+- helps to clean, enrich data before doing analysis
+- generate ETL code in python/ scala
+- can provide own spark/ pyspark scripts
+- target can be s3/ jdbc/ glue data Catalog
+- fully managed, cost effective, pay for resources consumed
+- jobs run on serverless spark platform
+- Glue scheduler to schedule jobs
+- Glue trigger to automate jobs on "events"
+
+GLUE ETL Transformation
+- Bundled Transformation
+    - dropfields, dropnullfields
+    - filter (script having function)
+    - join (enrich data)
+    - map (addfields, perform extended lookups, format conversions)
+    - apache spark transformations (like kmeans)
+- ML Transformation
+    - Find MatchML
+        identify duplicate/ matching records in datastores
+        with no uniqueID, find exact matches
+        used in deduplication
+Can use athena to query Db catalogs in a serverless way

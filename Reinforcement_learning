@@ -1,0 +1,28 @@
+REINFORCEMENT LEARNING
+- no training like other model
+- learn environment and how to navigate the environment in different conditions
+- learn rewards
+- fast performance once environment is expolred nicely
+
+Q-Learning
+- I implementation
+- S: states, a: actions, Q: value for each state, action pair, intially 0, bad Q less, good Q more
+- use Q to do future actions
+- "look ahead" more steps using a discount factor
+- all s,a:
+    - normal: always choose Q more, but may result in some loss
+    - epsilon: introduce lil randomness
+
+Markov Decision process
+- a methodical framework for modelling decision making in situation where lil bit randomness and lil of control on decision making
+- uses P(s,s') for probabity of state transition and R(s,s') for reward
+
+Automatic Model Tuning
+- how to choose best hyperparameter
+- need different combinatinos, get best
+- define hyperparameters and range of values of the hyperparameters which to optimise
+- learn as it goes, so dont have to try all combinations
+
+Best practices
+- dont try to optimise many hyperparameters, start with few in 1st pass and try next
+- use log scale whenever possible
